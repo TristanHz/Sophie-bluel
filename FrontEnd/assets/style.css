@@ -186,3 +186,27 @@ footer nav ul {
 	margin: 2em
 }
 
+.filtres {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	gap: 15px;
+	margin: 50px;
+}
+
+.boutonfiltre {
+	font-family: "Syne";
+	font-size: 16px;
+	font-style: bold;
+	font-weight: 700;
+	color: #1D6154;
+	border: 1px solid #1D6154;
+	border-radius: 60px;
+	padding: 10px;
+	cursor: pointer;
+}
+
+.boutonfiltre:hover {
+	background-color: #1D6154;
+	color: #FFFFFF;
+}
