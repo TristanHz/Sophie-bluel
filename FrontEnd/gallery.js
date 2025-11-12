@@ -12,18 +12,23 @@ works.forEach(work => {
     imgGallery.src = work.imageUrl;
     titleGallery.textContent = work.title;
 
+
     const figure = document.createElement("figure")
+    figure.dataset.categoryId = work.categoryId;
 
     figure.appendChild(imgGallery);
     figure.appendChild(titleGallery);
 
     galleryDiv.appendChild(figure)
 
+    return works;
+
 })}
 
 getworks();
 
-async function getCat() {
+
+async function getCat(event) {
     const reponse =await fetch("http://localhost:5678/api/categories");
     const categories =await reponse.json();
     categories.unshift({"id":0, "name":"Tous"});
@@ -39,20 +44,21 @@ async function getCat() {
         boutons.className = "boutonfiltre";
         boutonFiltrer.appendChild(boutons);
 
-        const button = document.querySelector('button')
         const works = document.querySelectorAll("figure")
-        const id = button.id
-        const workId = works.id
+        const button = document.querySelectorAll("#boutonfiltres")
+        const idTitre = document.querySelectorAll("figure h3")
 
-        boutons.addEventListener("click", () => {
-
+        boutons.addEventListener("click", (event) => {
+            const id = event.target.id;
             works.forEach(work => {
-                if (workId === 0) {
+                                
+                if (id === "0") {
                     work.style.display = "";
-                } else if (workId != id) {
-                    work.style.display = "none";
+                } else if (id === work.dataset.categoryId) {
+                    work.style.display = "";
                 } else {
-                    work.style.display = "";
+                    work.style.display = "none"
+                
                 }})
 
         
@@ -61,5 +67,4 @@ async function getCat() {
     })}
 
 getCat();
-
 
