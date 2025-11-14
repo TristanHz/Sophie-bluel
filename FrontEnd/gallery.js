@@ -1,27 +1,29 @@
+const API = "http://localhost:5678/api/"
+
 async function getworks() {
-    const reponse = await fetch("http://localhost:5678/api/works");
+    const reponse = await fetch(API + "works");
     const works = await reponse.json();
 
     const galleryDiv=document.getElementById("gallery");
     
-works.forEach(work => {
-    
-    const imgGallery=document.createElement("img");
-    const titleGallery=document.createElement("h3");
+    works.forEach(work => {
+        
+        const imgGallery=document.createElement("img");
+        const titleGallery=document.createElement("h3");
 
-    imgGallery.src = work.imageUrl;
-    titleGallery.textContent = work.title;
+        imgGallery.src = work.imageUrl;
+        titleGallery.textContent = work.title;
 
 
-    const figure = document.createElement("figure")
-    figure.dataset.categoryId = work.categoryId;
+        const figure = document.createElement("figure")
+        figure.dataset.categoryId = work.categoryId;
 
-    figure.appendChild(imgGallery);
-    figure.appendChild(titleGallery);
+        figure.appendChild(imgGallery);
+        figure.appendChild(titleGallery);
 
-    galleryDiv.appendChild(figure)
+        galleryDiv.appendChild(figure)
 
-    return works;
+        return works;
 
 })}
 
@@ -29,7 +31,7 @@ getworks();
 
 
 async function getCat(event) {
-    const reponse =await fetch("http://localhost:5678/api/categories");
+    const reponse =await fetch(API + "categories");
     const categories =await reponse.json();
     categories.unshift({"id":0, "name":"Tous"});
 
@@ -45,8 +47,6 @@ async function getCat(event) {
         boutonFiltrer.appendChild(boutons);
 
         const works = document.querySelectorAll("figure")
-        const button = document.querySelectorAll("#boutonfiltres")
-        const idTitre = document.querySelectorAll("figure h3")
 
         boutons.addEventListener("click", (event) => {
             const id = event.target.id;

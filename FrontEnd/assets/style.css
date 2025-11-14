@@ -90,7 +90,8 @@ nav ul {
 	list-style-type: none;
 
 }
-nav li {
+nav li,
+a {
 	padding: 0 10px;
 	font-size: 1.2em;
 }
@@ -98,6 +99,7 @@ nav li {
 li:hover {
 	color: #B1663C;
 }
+
 #introduction {
 	display: flex;
 	align-items: center;
@@ -209,4 +211,67 @@ footer nav ul {
 .boutonfiltre:hover {
 	background-color: #1D6154;
 	color: #FFFFFF;
+}
+
+.boutonlogin {
+	font-family: "Syne";
+	font-size: 14px;
+	font-weight: 700;
+	color: #1D6154;
+	border: 1px solid #1D6154;
+	border-radius: 60px;
+	padding: 10px;
+	cursor: pointer;
+	width: 179px;
+	margin-top: 15px;
+	margin-bottom: 37px;
+}
+
+.boutonlogin:hover {
+	background-color: #1D6154;
+	color: #FFFFFF;
+}
+
+.log-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.box-form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 25px;
+	margin-top: 50px;
+}
+
+.box-email,
+.box-password {
+	width: 379px;
+	height: 51px;
+	border: none;
+	box-shadow: 0px 4px 14px 0px #00000017;
+	outline: none;
+	font-size: 20px;
+	padding-left: 15px;
+}
+
+.input-txt {
+	margin-bottom: 5px;
+	font-weight: 500;
+	font-style: Medium;
+	font-size: 14px;
+	line-height: 100%;
+	letter-spacing: 0%;
+}
+
+.reset-pass {
+	font-size: 14px;
+	text-decoration: underline;
+}
+
+.txt-log {
+	font-weight: bold;
 }
