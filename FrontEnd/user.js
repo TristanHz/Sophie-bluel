@@ -21,11 +21,26 @@ document.getElementById("box-form").addEventListener("submit", async (event) => 
         if (reponse.ok) {
             console.log("Connexion réussie !");
             console.log("Token :", data.token);
-        } else {
-            console.error(data.message)
+            window.localStorage.setItem("token", data.token);
+            window.location.href = "index.html";
+            return;
         }
-        
+
+        if (!reponse.ok) {
+            afficherErreur(data.message || "E-mail ou mot de passe incorrect");
+            return;
+        }
 });
+
+function afficherErreur(message) {    
+    const ErrMessage = document.getElementById("error-message");
+        ErrMessage.textContent = "";
+        ErrMessage.textContent = message;
+        ErrMessage.style.color = "red"
+}
+
+
+
 
 
     

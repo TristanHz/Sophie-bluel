@@ -68,3 +68,46 @@ async function getCat(event) {
 
 getCat();
 
+function logOn() {
+    let token = window.localStorage.getItem("token");
+
+    const loginNav = document.getElementById("login");
+    const logoutNav = document.getElementById("logout")
+    const filtres = document.getElementById("filtres")
+
+    const titreProjet = document.querySelector("#portfolio h2")
+    const boutonModif = document.createElement("a")
+    const iconeModif = document.createElement("i")
+
+    if (token !== null) {
+        loginNav.style.display = "none"
+        logoutNav.style.display = "block"
+        filtres.style.display = "none"
+        titreProjet.style.marginBottom = "100px"
+        iconeModif.className = "fa-solid fa-pen-to-square icone-modif"
+        boutonModif.innerText = "modifier"
+        boutonModif.className = "bouton-modif"
+        titreProjet.appendChild(iconeModif)
+        iconeModif.appendChild(boutonModif)            
+
+    } else {
+        loginNav.style.display = "block"
+        logoutNav.style.display = "none"
+    }
+}
+
+logOn();
+
+function logOut() {
+    const token = window.localStorage.getItem("token")
+    const boutonLogOff = document.getElementById("logout")
+    boutonLogOff.addEventListener('click', function () {
+        window.localStorage.removeItem("token");
+
+    })
+    console.log(boutonLogOff)
+}
+
+
+
+
