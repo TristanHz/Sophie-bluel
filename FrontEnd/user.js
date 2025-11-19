@@ -1,5 +1,4 @@
-const API = "http://localhost:5678/api/"
-
+console.log(document.getElementById("box-form"))
 document.getElementById("box-form").addEventListener("submit", async (event) => {
     event.preventDefault();
 
@@ -27,7 +26,7 @@ document.getElementById("box-form").addEventListener("submit", async (event) => 
         }
 
         if (!reponse.ok) {
-            afficherErreur(data.message || "E-mail ou mot de passe incorrect");
+            afficherErreur("E-mail ou mot de passe incorrect");
             return;
         }
 });

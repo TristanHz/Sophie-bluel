@@ -98,15 +98,15 @@ function logOn() {
 
 logOn();
 
-function logOut() {
+const boutonLogOff = document.getElementById("logout")
+boutonLogOff.addEventListener('click', function logOut() {
     const token = window.localStorage.getItem("token")
-    const boutonLogOff = document.getElementById("logout")
-    boutonLogOff.addEventListener('click', function () {
+    console.log(token)
         window.localStorage.removeItem("token");
-
+        location.reload();
     })
     console.log(boutonLogOff)
-}
+
 
 
 
