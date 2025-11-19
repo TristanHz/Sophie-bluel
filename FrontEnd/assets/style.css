@@ -301,3 +301,21 @@ footer nav ul {
 	top: -3px;
 	cursor: pointer;
 }
+
+.edit {
+	display: none;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-color: black;
+	width: 100vw;
+	height: 59px;
+	margin: 0;
+	padding: 0;
+	color: #FFFFFF;
+	font-size: 16px;
+}

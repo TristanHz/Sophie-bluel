@@ -72,26 +72,30 @@ function logOn() {
     let token = window.localStorage.getItem("token");
 
     const loginNav = document.getElementById("login");
-    const logoutNav = document.getElementById("logout")
-    const filtres = document.getElementById("filtres")
+    const logoutNav = document.getElementById("logout");
+    const filtres = document.getElementById("filtres");
+    const body = document.querySelector("body");
+    const titreProjet = document.querySelector("#portfolio h2");
+    const edit = document.getElementById("edit")
 
-    const titreProjet = document.querySelector("#portfolio h2")
-    const boutonModif = document.createElement("a")
-    const iconeModif = document.createElement("i")
+    const boutonModif = document.createElement("a");
+    const iconeModif = document.createElement("i");
 
     if (token !== null) {
-        loginNav.style.display = "none"
-        logoutNav.style.display = "block"
-        filtres.style.display = "none"
-        titreProjet.style.marginBottom = "100px"
-        iconeModif.className = "fa-solid fa-pen-to-square icone-modif"
-        boutonModif.innerText = "modifier"
-        boutonModif.className = "bouton-modif"
-        titreProjet.appendChild(iconeModif)
-        iconeModif.appendChild(boutonModif)            
+        edit.style.display = "flex";
+        loginNav.style.display = "none";
+        logoutNav.style.display = "block";
+        filtres.style.display = "none";
+        titreProjet.style.marginBottom = "100px";
+        iconeModif.className = "fa-solid fa-pen-to-square icone-modif";
+        boutonModif.innerText = "modifier";
+        boutonModif.className = "bouton-modif";
+        titreProjet.appendChild(iconeModif);
+        iconeModif.appendChild(boutonModif);
+        body.style.marginTop = "90px";
 
     } else {
-        loginNav.style.display = "block"
+        loginNav.style.display = "block";
         logoutNav.style.display = "none"
     }
 }
