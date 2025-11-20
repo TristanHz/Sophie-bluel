@@ -90,6 +90,7 @@ function logOn() {
         iconeModif.className = "fa-solid fa-pen-to-square icone-modif";
         boutonModif.innerText = "modifier";
         boutonModif.className = "bouton-modif";
+        boutonModif.setAttribute("href", "#modale")
         titreProjet.appendChild(iconeModif);
         iconeModif.appendChild(boutonModif);
         body.style.marginTop = "90px";
@@ -109,7 +110,48 @@ boutonLogOff.addEventListener('click', function logOut() {
         window.localStorage.removeItem("token");
         location.reload();
     })
-    console.log(boutonLogOff)
+
+let modale = null;
+
+const ouvrirModale = function (e) {
+    e.preventDefault();
+    const target = document.querySelector(e.target.getAttribute("href"));
+    target.style.display = null;
+    target.removeAttribute("aria-hidden");
+    target.setAttribute("aria-modal", "true");
+    modale = target;
+    modale.addEventListener('click', fermerModale);
+    modale.querySelector("#fermerModale").addEventListener('click', fermerModale);
+    modale.querySelector(".modale-stop").addEventListener('click', stopPropagation);
+}
+
+const fermerModale = function (e) {
+    if (modale === null) return;
+    e.preventDefault();
+    modale.style.display = "none";
+    modale.setAttribute("aria-hidden", "true");
+    modale.removeAttribute("aria-modal");
+    modale.removeEventListener('click', fermerModale);
+    modale.querySelector("#fermerModale").removeEventListener('click', fermerModale);
+    modale.querySelector(".modale-stop").removeEventListener('click', stopPropagation);
+    modale = null
+}
+
+const stopPropagation = function (e) {
+    e.stopPropagation()
+}
+
+document.querySelectorAll(".bouton-modif").forEach(a => {
+    a.addEventListener('click', ouvrirModale)
+})
+
+window.addEventListener('keydown', function (e) {
+    if (e.key === "Escape" || e.key === "Esc") {
+        fermerModale(e);
+    }
+})
+
+
 
 
 
