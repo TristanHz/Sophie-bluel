@@ -4,24 +4,29 @@ async function getworks() {
     const reponse = await fetch(API + "works");
     const works = await reponse.json();
 
-    const galleryDiv=document.getElementById("gallery");
+    const galleryDiv = document.getElementById("gallery");
+    const modaleDiv = document.getElementById("imgModaleEdit")
     
     works.forEach(work => {
         
+        const imgModale = document.createElement("img");
         const imgGallery=document.createElement("img");
         const titleGallery=document.createElement("h3");
 
+        imgModale.src = work.imageUrl;
         imgGallery.src = work.imageUrl;
         titleGallery.textContent = work.title;
 
 
         const figure = document.createElement("figure")
         figure.dataset.categoryId = work.categoryId;
+        imgModale.dataset.categoryId = work.categoryId;
 
         figure.appendChild(imgGallery);
         figure.appendChild(titleGallery);
 
         galleryDiv.appendChild(figure)
+        modaleDiv.appendChild(imgModale)
 
         return works;
 
@@ -150,6 +155,8 @@ window.addEventListener('keydown', function (e) {
         fermerModale(e);
     }
 })
+
+
 
 
 
