@@ -375,14 +375,13 @@ footer nav ul {
 	align-content: center;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-column-gap: 10px;
-    grid-row-gap: 30px;
+    grid-row-gap: 0px;
 	padding-top: 30px;
-	width: 100%;
 }
 
 #imgModaleEdit img {
-	width: 80px;
-	height: 100%;
+	max-width: 79px;
+	height: 120px;
 }
 
 .edition-modale {
@@ -419,4 +418,20 @@ footer nav ul {
 .btn-valide-edit:hover {
 	background-color: #1D6154;
 	color: #FFFFFF;
+}
+
+.img-modale {
+	position: relative;
+	right: -52px;
+	top: -115px;
+	font-family: "Font Awesome 6 Free";
+	font-size: 17px;
+	content: "\f2ed";
+	color: white;
+	background-color: black;
+	height: auto;
+	padding: 4px;
+	border-radius: 3px;
+	cursor: pointer;
+	border: none;
 }

@@ -10,12 +10,18 @@ async function getworks() {
     works.forEach(work => {
         
         const imgModale = document.createElement("img");
-        const imgGallery=document.createElement("img");
-        const titleGallery=document.createElement("h3");
+        const imgGallery = document.createElement("img");
+        const titleGallery = document.createElement("h3");
+        const figureModale = document.createElement("figure")
+        const btnSuppression = document.createElement("button")
 
-        imgModale.src = work.imageUrl;
         imgGallery.src = work.imageUrl;
         titleGallery.textContent = work.title;
+
+        imgModale.src = work.imageUrl;
+        btnSuppression.className = "fa-solid fa-trash-can img-modale"
+        btnSuppression.setAttribute("id", "btnSuprr")
+        btnSuppression.setAttribute("type", "button")
 
 
         const figure = document.createElement("figure")
@@ -26,11 +32,12 @@ async function getworks() {
         figure.appendChild(titleGallery);
 
         galleryDiv.appendChild(figure)
-        modaleDiv.appendChild(imgModale)
+        figureModale.appendChild(imgModale)
+        figureModale.appendChild(btnSuppression)
+        modaleDiv.appendChild(figureModale)
 
-        return works;
 
-})}
+})};
 
 getworks();
 
@@ -128,6 +135,19 @@ const ouvrirModale = function (e) {
     modale.addEventListener('click', fermerModale);
     modale.querySelector("#fermerModale").addEventListener('click', fermerModale);
     modale.querySelector(".modale-stop").addEventListener('click', stopPropagation);
+
+    const btnSupr = document.querySelectorAll("button.img-modale")
+        
+    btnSupr.forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            const btnClic = e.currentTarget;
+            console.log(btnClic)
+
+            const parent = btnClic.closest("figure")
+            console.log(parent)
+        })
+    })
+
 }
 
 const fermerModale = function (e) {
@@ -155,11 +175,6 @@ window.addEventListener('keydown', function (e) {
         fermerModale(e);
     }
 })
-
-
-
-
-
 
 
 
