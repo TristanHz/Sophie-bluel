@@ -420,6 +420,24 @@ footer nav ul {
 	color: #FFFFFF;
 }
 
+.btn-valide-ajout {
+	display: none;
+	margin: 30px;
+	margin-top: 35px;
+	font-family: "Syne";
+	font-size: 16px;
+	font-style: bold;
+	font-weight: 700;
+	color: white;
+	background-color: #A7A7A7;
+	border : none;
+	border-radius: 60px;
+	padding: 10px;
+	padding-left: 90px;
+	padding-right: 90px;
+	cursor: pointer;
+}
+
 .img-modale {
 	position: relative;
 	right: -52px;
@@ -434,4 +452,101 @@ footer nav ul {
 	border-radius: 3px;
 	cursor: pointer;
 	border: none;
+}
+
+#imgModaleAjout {
+	display: none;
+	flex-direction: column;
+}
+
+.dropzone {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+    width: 100%;
+    padding-bottom: 20px;
+	padding-top: 20px;
+    background: #e9f1f6;
+    border-radius: 3px;
+    text-align: center;
+	margin-top: 30px;
+}
+
+.btn-ajout-plus {
+	font-family: "Work Sans";
+	font-size: 14px;
+	font-style: medium;
+	font-weight: bold;
+	color: #306685;
+	background-color: #CBD6DC;
+	border: none;
+	border-radius: 60px;
+	padding: 10px;
+	padding-left: 30px;
+	padding-right: 30px;
+	cursor: pointer;
+	letter-spacing: 0%;
+	line-height: 100%;
+}
+
+.format {
+	font-family: "Work Sans";
+	font-weight: 400;
+	font-size: 10px;
+	color: #444444;
+}
+
+.ajout-icone {
+	width: 76px;
+	height: 76px;
+	margin-bottom: -10px;
+}
+
+.titre-photo {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	padding-top: 20px;
+}
+
+.titre-photo-input {
+	height: 51px;
+	border: none;
+	border-color: rgba(255, 255, 255, 1);
+	box-shadow: 0px 4px 14px 0px #00000017;
+	outline: none;
+	margin-top: 10px;
+	padding-left: 10px;
+}
+
+.label-titre {
+	color: rgba(61, 61, 61, 1);
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.cat-photo-input {
+	height: 51px;
+	border: none;
+	border-color: rgba(255, 255, 255, 1);
+	box-shadow: 0px 4px 14px 0px #00000017;
+	outline: none;
+	margin-top: 10px;
+}
+
+.menu-cat {
+	display: none;
+	margin: 10px;
+	background-color: white;
+}
+
+.menu-cat li {
+	position: relative;
+	background-color: #FFFFFF;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	border: 1px solid;
 }
