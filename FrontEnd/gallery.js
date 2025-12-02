@@ -187,22 +187,41 @@ const fermerModale = function (e) {
     modale.querySelector("#fermerModale").removeEventListener('click', fermerModale);
     modale.querySelector(".modale-stop").removeEventListener('click', stopPropagation);
     modale = null;
-}
+};
 
 
 const stopPropagation = function (e) {
     e.stopPropagation()
-}
+};
 
 document.querySelectorAll(".bouton-modif").forEach(a => {
     a.addEventListener('click', ouvrirModale)
-})
+});
 
 window.addEventListener('keydown', function (e) {
     if (e.key === "Escape" || e.key === "Esc") {
         fermerModale(e);
     }
-})
+});
+
+const retour = document.getElementById("retour");
+
+retour.addEventListener("click", () => {
+  const modaleSupression = document.getElementById("imgModaleEdit");
+  const modaleAjout = document.getElementById("imgModaleAjout");
+  const btnAjout = document.getElementById("btnAjouter");
+  const btnValider = document.getElementById("btnValider");
+  const titre = document.querySelector(".edition-modale h3");
+
+  retour.style.visibility = "hidden";
+  btnAjout.style.display = "block";
+  btnValider.style.display = "none";
+
+  modaleSupression.style.display = "grid";
+  modaleAjout.style.display = "none";
+
+  titre.innerText = "Galerie photo";
+});
 
 async function refreshGallery() {
     const galleryDiv = document.getElementById("gallery");
@@ -234,16 +253,32 @@ btnAjout.addEventListener('click', (e) => {
 
     const modaleSupression = document.getElementById("imgModaleEdit");
     const modaleAjout = document.getElementById("imgModaleAjout");
-    const btnValider = document.getElementById("btnValider")
+    const btnValider = document.getElementById("btnValider");
     const titre = document.querySelector(".edition-modale h3");
-    const retour = document.getElementById("retour")
-        retour.style.visibility = "visible"
-        btnAjout.style.display = "none"
-        btnValider.style.display = "block"
-        modaleSupression.style.display = "none";
-        modaleAjout.style.display = "flex";
-        titre.innerText = ""
-        titre.innerText = "Ajout photo"
+    const retour = document.getElementById("retour");
+
+    retour.style.visibility = "visible";
+    btnAjout.style.display = "none";
+    btnValider.style.display = "block";
+    modaleSupression.style.display = "none";
+    modaleAjout.style.display = "flex";
+    titre.innerText = "";
+    titre.innerText = "Ajout photo";
+
+    const imgPreview = document.getElementById("previewImage");
+    const imgIcone = document.getElementById("ajoutIcone");
+    const btnAjoutPlus = document.getElementById("btnAjoutPlus");
+    const format = document.getElementById("format");
+    const dropzone = document.getElementById("dropzone");
+
+    if (imgPreview) {
+        imgPreview.remove();
+        imgIcone.style.display = "block";
+        btnAjoutPlus.style.display = "flex";
+        format.style.display = "block";
+        dropzone.style.padding = "20px";
+
+    }
 
 });
 
@@ -259,7 +294,7 @@ async function catAjout() {
             const nomCat = categorie.name;
             const idCat = categorie.id;
 
-            const elementCat = document.createElement("li")
+            const elementCat = document.createElement("option")
             elementCat.innerText = nomCat;
             elementCat.classList = "Categorie-liste";
             elementCat.id = idCat;
@@ -270,3 +305,46 @@ async function catAjout() {
 
 catAjout();
 
+function previewImage(e) {
+    const input = e.target;
+    const image = document.getElementById("previewImage");
+
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            image.src = e.target.result;
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+    console.log(input.files);
+};
+
+document.getElementById("fileInput").addEventListener('change', function(e) {
+
+    const dropzone = document.getElementById("dropzone");
+    const imgIcone = document.getElementById("ajoutIcone");
+    const btnAjout = document.getElementById("btnAjoutPlus");
+    const format = document.getElementById("format");
+
+    imgIcone.style.display = "none";
+    btnAjout.style.display = "none";
+    format.style.display = "none";
+    const imgPreview = document.createElement("img");
+
+    imgPreview.setAttribute("id", "previewImage");
+    imgPreview.setAttribute("alt", "image Preview");
+    imgPreview.classList.add("image-preview");
+    dropzone.style.padding = "0";
+
+    dropzone.appendChild(imgPreview);
+
+
+    previewImage(e);
+});
+
+const btnValider = document.getElementById("btnValider").addEventListener('click', () => {
+    const menuCat = document.getElementById("menuCat");
+    console.log(menuCat.value)
+})

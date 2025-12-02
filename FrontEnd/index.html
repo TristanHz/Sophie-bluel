@@ -49,14 +49,14 @@
 			<i class="fa-solid fa-x" id="fermerModale"></i>
 			<div class="edition-modale">
 				<h3>Galerie photo</h3>
+				<form>
 				<div class="contenu-modale" id="contenuModale">
 					<div id="imgModaleEdit"></div>
 					<div id="imgModaleAjout">
 						<div class="dropzone" id="dropzone">
-							<img src="assets/icons/image-regular-full.svg" class="ajout-icone" id="ajoutIcone"></i>
-							<label for="fileInput" class="btn-ajout-plus">+ Ajouter photo</label>
-							<input type="file" id="fileInput" accept="png, jpeg" hidden>
-							<p class="format">jpg, png : 4mo max</p>
+							<img src="assets/icons/image-regular-full.svg" class="ajout-icone" id="ajoutIcone" alt="icone ajouter">
+							<label for="fileInput" class="btn-ajout-plus" id="btnAjoutPlus">+ Ajouter photo</label>
+							<p class="format" id="format">jpg, png : 4mo max</p>
 							<input type="file" id="fileInput" accept="image/png, image/jpeg" hidden>
 						</div>
 						<div class="titre-photo">
@@ -65,14 +65,17 @@
 						</div>
 						<div class="titre-photo">
 							<label for="titre" class="label-titre">Catégorie</label>
-							<form id="categoriePhoto" class="cat-photo-input">
-								<ol class="menu-cat" id="menuCat"></ol>
-							</form>
+							<div id="categoriePhoto" class="cat-photo-input">
+								<select class="menu-cat" id="menuCat">
+									<option></option>
+								</select>
+							</div>
 						</div>
 					</div>
 				</div>
-				<button class="btn-valide-edit" type="submit" id="btnAjouter">Ajouter une photo</button>
-				<button class="btn-valide-ajout" type="submit" id="btnValider">Valider</button>
+					<button class="btn-valide-edit" type="submit" id="btnAjouter">Ajouter une photo</button>
+					<button class="btn-valide-ajout" type="submit" id="btnValider">Valider</button>
+					
 			</div>
 		</div>
 	</aside>
