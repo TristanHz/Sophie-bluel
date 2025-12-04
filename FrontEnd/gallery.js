@@ -207,20 +207,21 @@ window.addEventListener('keydown', function (e) {
 const retour = document.getElementById("retour");
 
 retour.addEventListener("click", () => {
-  const modaleSupression = document.getElementById("imgModaleEdit");
-  const modaleAjout = document.getElementById("imgModaleAjout");
-  const btnAjout = document.getElementById("btnAjouter");
-  const btnValider = document.getElementById("btnValider");
-  const titre = document.querySelector(".edition-modale h3");
 
-  retour.style.visibility = "hidden";
-  btnAjout.style.display = "block";
-  btnValider.style.display = "none";
+    const modaleSupression = document.getElementById("imgModaleEdit");
+    const modaleAjout = document.getElementById("imgModaleAjout");
+    const btnAjout = document.getElementById("btnAjouter");
+    const btnValider = document.getElementById("btnValider");
+    const titre = document.querySelector(".edition-modale h3");
 
-  modaleSupression.style.display = "grid";
-  modaleAjout.style.display = "none";
+    retour.style.visibility = "hidden";
+    btnAjout.style.display = "block";
+    btnValider.style.display = "none";
 
-  titre.innerText = "Galerie photo";
+    modaleSupression.style.display = "grid";
+    modaleAjout.style.display = "none";
+
+    titre.innerText = "Galerie photo";
 });
 
 async function refreshGallery() {
@@ -297,7 +298,7 @@ async function catAjout() {
             const elementCat = document.createElement("option")
             elementCat.innerText = nomCat;
             elementCat.classList = "Categorie-liste";
-            elementCat.id = idCat;
+            elementCat.value = idCat;
 
             listeCat.appendChild(elementCat)
 
@@ -344,7 +345,48 @@ document.getElementById("fileInput").addEventListener('change', function(e) {
     previewImage(e);
 });
 
-const btnValider = document.getElementById("btnValider").addEventListener('click', () => {
-    const menuCat = document.getElementById("menuCat");
-    console.log(menuCat.value)
-})
+const formAjout = document.getElementById("editionModale");
+
+formAjout.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(formAjout);
+    const token = localStorage.getItem("token");
+    console.log(token);
+
+    try {
+        const reponse = await fetch(API + "works", {
+            method: "POST",
+            headers: {
+                        Authorization: `Bearer ${token}`
+                    },
+            body: formData
+            });
+        
+        const data = await reponse.json();
+        console.log("ok pour API", data);
+        console.log("mes data de base :", formData);
+
+        } catch (error) {
+            console.error("Erreur :", error);
+        }
+    });
+
+    const formBtnAjout = document.getElementById("btnValider")
+    const inputImg = document.getElementById("fileInput");
+    const inputTitre = document.getElementById("titrePhoto");
+    const inputCat = document.getElementById("menuCat");
+
+    function checkForm() {
+            const img = inputImg.files.length > 0;
+            const titre = inputTitre.value !== "";
+            const select = inputCat.value !== "";
+
+            if (img && titre && select) {
+                formBtnAjout.style.backgroundColor = "#1D6154"
+            }
+    }
+
+    inputImg.addEventListener("change", checkForm);
+    inputTitre.addEventListener("input", checkForm);
+    inputCat.addEventListener("change", checkForm);

@@ -47,9 +47,8 @@
 		<div class="modale-box modale-stop">
 			<i class="fa-solid fa-arrow-left" id="retour" ></i>
 			<i class="fa-solid fa-x" id="fermerModale"></i>
-			<div class="edition-modale">
+			<form class="edition-modale" id="editionModale" method="">
 				<h3>Galerie photo</h3>
-				<form>
 				<div class="contenu-modale" id="contenuModale">
 					<div id="imgModaleEdit"></div>
 					<div id="imgModaleAjout">
@@ -57,26 +56,25 @@
 							<img src="assets/icons/image-regular-full.svg" class="ajout-icone" id="ajoutIcone" alt="icone ajouter">
 							<label for="fileInput" class="btn-ajout-plus" id="btnAjoutPlus">+ Ajouter photo</label>
 							<p class="format" id="format">jpg, png : 4mo max</p>
-							<input type="file" id="fileInput" accept="image/png, image/jpeg" hidden>
+							<input type="file" id="fileInput" accept="image/png, image/jpeg" name="image" hidden>
 						</div>
 						<div class="titre-photo">
-							<label for="titre" class="label-titre">Titre</label>
-							<input type="text" id="titrePhoto" class="titre-photo-input">
+							<label class="label-titre">Titre</label>
+							<input type="text" id="titrePhoto" class="titre-photo-input" name="title">
 						</div>
 						<div class="titre-photo">
-							<label for="titre" class="label-titre">Catégorie</label>
+							<label class="label-titre">Catégorie</label>
 							<div id="categoriePhoto" class="cat-photo-input">
-								<select class="menu-cat" id="menuCat">
+								<select class="menu-cat" id="menuCat" name="category">
 									<option></option>
 								</select>
 							</div>
 						</div>
 					</div>
 				</div>
-					<button class="btn-valide-edit" type="submit" id="btnAjouter">Ajouter une photo</button>
-					<button class="btn-valide-ajout" type="submit" id="btnValider">Valider</button>
-					
-			</div>
+				<button class="btn-valide-edit" type="button" id="btnAjouter">Ajouter une photo</button>
+				<button class="btn-valide-ajout" type="submit" id="btnValider">Valider</button>
+			</form>
 		</div>
 	</aside>
 	<section id="portfolio">
