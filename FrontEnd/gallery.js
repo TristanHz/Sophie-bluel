@@ -226,15 +226,28 @@ retour.addEventListener("click", () => {
 
 async function refreshGallery() {
     const galleryDiv = document.getElementById("gallery");
+    const modaleDiv = document.getElementById("imgModaleEdit");
     galleryDiv.innerHTML = "";
+    modaleDiv.innerHTML = "";
 
     const reponse = await fetch(API + "works");
     const works = await reponse.json();
 
     works.forEach(work => {
+
         const figure = document.createElement("figure");
+        const imgModale = document.createElement("img");
+        const figureModale = document.createElement("figure");
+        const btnSuppression = document.createElement("button");
+
         figure.dataset.categoryId = work.categoryId;
         figure.dataset.id = work.id;
+
+        imgModale.src = work.imageUrl;
+        btnSuppression.className = "fa-solid fa-trash-can img-modale";
+        btnSuppression.setAttribute("id", "btnSuprr");
+        btnSuppression.setAttribute("type", "button");
+        imgModale.dataset.id = work.id;
 
         const imgGallery = document.createElement("img");
         imgGallery.src = work.imageUrl;
@@ -243,8 +256,13 @@ async function refreshGallery() {
 
         figure.appendChild(imgGallery);
         figure.appendChild(titleGallery);
+        figureModale.appendChild(imgModale);
+        figureModale.appendChild(btnSuppression);
+        modaleDiv.appendChild(figureModale);
 
         galleryDiv.appendChild(figure);
+
+
     });
 }
 
@@ -352,24 +370,54 @@ formAjout.addEventListener("submit", async (e) => {
 
     const formData = new FormData(formAjout);
     const token = localStorage.getItem("token");
+    const img = inputImg.files.length;
+    const titre = inputTitre.value;
+    const select = inputCat.value;
     console.log(token);
 
-    try {
-        const reponse = await fetch(API + "works", {
-            method: "POST",
-            headers: {
-                        Authorization: `Bearer ${token}`
-                    },
-            body: formData
-            });
-        
-        const data = await reponse.json();
-        console.log("ok pour API", data);
-        console.log("mes data de base :", formData);
-        refreshGallery();
+    if (img === 0 || titre === "" || select === "") 
+        {
+            console.log("if correct")
+            afficherMessageErreur();
 
-        } catch (error) {
-            console.error("Erreur :", error);
+        } else {
+        try {
+            const reponse = await fetch(API + "works", {
+                method: "POST",
+                headers: {
+                            Authorization: `Bearer ${token}`
+                        },
+                body: formData
+                });
+            
+            const data = await reponse.json();
+            console.log("ok pour API", data);
+            console.log("mes data de base :", formData);
+
+            if (reponse.ok) {
+
+                afficherMessageValide();
+                };
+
+            formAjout.reset();
+            refreshGallery();
+            const preview = document.getElementById("previewImage");
+            const iconeDropzone = document.getElementById("ajoutIcone");
+            const btnAjoutPlus = document.getElementById("btnAjoutPlus");
+            const format = document.getElementById("format");
+
+            preview.src = "";
+            preview.style.display = "none";
+            iconeDropzone.style.display = "flex";
+            iconeDropzone.style.marginTop = "30px";
+            btnAjoutPlus.style.display = "flex";
+            format.style.display = "flex";
+            format.style.marginBottom = "30px";
+
+
+            } catch (error) {
+                console.error("Erreur :", error);
+            }
         }
     });
 
@@ -391,3 +439,36 @@ formAjout.addEventListener("submit", async (e) => {
     inputImg.addEventListener("change", checkForm);
     inputTitre.addEventListener("input", checkForm);
     inputCat.addEventListener("change", checkForm);
+
+    function afficherMessageErreur() {
+
+        const messageZone = document.getElementById("contenuModale");
+        const messageErreur = document.createElement("p");
+        messageErreur.id = "messageErreur";
+        messageErreur.innerText = "Veuillez compléter tous les champs";
+        messageErreur.style.color = "red";
+        messageErreur.style.display ="flex";
+        messageErreur.style.justifyContent = "center";
+        messageErreur.style.marginTop = "20px";
+        messageZone.appendChild(messageErreur);
+
+        setTimeout(() => {
+            messageErreur.style.display = "none";
+        }, 2000);
+    }
+
+    function afficherMessageValide() {
+
+        const messageZone = document.getElementById("contenuModale");
+        const messageValide = document.createElement("p");
+        messageValide.innerText = "Photo ajoutée";
+        messageValide.style.color = "green";
+        messageValide.style.display ="flex";
+        messageValide.style.justifyContent = "center";
+        messageValide.style.marginTop = "20px";
+        messageZone.appendChild(messageValide);
+
+        setTimeout(() => {
+            messageValide.style.display = "none";
+        }, 4000);
+    }
