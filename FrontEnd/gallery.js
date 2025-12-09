@@ -391,8 +391,6 @@ formAjout.addEventListener("submit", async (e) => {
                 });
             
             const data = await reponse.json();
-            console.log("ok pour API", data);
-            console.log("mes data de base :", formData);
 
             if (reponse.ok) {
 
