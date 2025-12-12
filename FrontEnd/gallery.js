@@ -58,11 +58,22 @@ async function getCat(event) {
         boutons.innerText = categorie.name;
         boutons.id = categorie.id;
         boutons.className = "boutonfiltre";
+
+        if (categorie.id === 0) {
+            boutons.classList.add("active");
+        }
+
         boutonFiltrer.appendChild(boutons);
 
         const works = document.querySelectorAll("figure")
 
         boutons.addEventListener("click", (event) => {
+
+            const btnActif = document.querySelector(".boutonfiltre.active");
+
+            if (btnActif) btnActif.classList.remove("active");
+            event.target.classList.add("active");
+
             const id = event.target.id;
             works.forEach(work => {
                                 
@@ -74,6 +85,8 @@ async function getCat(event) {
                     work.style.display = "none"
                 
                 }});
+
+        
 
     
     })      
@@ -371,13 +384,12 @@ formAjout.addEventListener("submit", async (e) => {
     const formData = new FormData(formAjout);
     const token = localStorage.getItem("token");
     const img = inputImg.files.length;
-    const titre = inputTitre.value;
+    const titre = inputTitre.value.trim();
     const select = inputCat.value;
     console.log(token);
 
-    if (img === 0 || titre === "" || select === "") 
+    if (img === 0 || !titre || !select) 
         {
-            console.log("if correct")
             afficherMessageErreur();
 
         } else {
@@ -430,7 +442,11 @@ formAjout.addEventListener("submit", async (e) => {
             const select = inputCat.value !== "";
 
             if (img && titre && select) {
-                formBtnAjout.style.backgroundColor = "#1D6154"
+                formBtnAjout.style.backgroundColor = "#1D6154";
+                formBtnAjout.disabled = false;
+            } else {
+                formBtnAjout.style.backgroundColor = "#A7A7A7"
+                formBtnAjout.disabled = true;
             }
     }
 

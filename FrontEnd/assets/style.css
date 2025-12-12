@@ -213,6 +213,11 @@ footer nav ul {
 	cursor: pointer;
 }
 
+.boutonfiltre.active {
+	background-color: #1D6154;
+	color: white;
+}
+
 .boutonfiltre:hover {
 	background-color: #1D6154;
 	color: #FFFFFF;
@@ -436,6 +441,10 @@ footer nav ul {
 	padding-left: 90px;
 	padding-right: 90px;
 	cursor: pointer;
+}
+
+.btn-valide-ajout[disabled] {
+  pointer-events: auto;
 }
 
 .img-modale {
